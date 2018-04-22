@@ -1,12 +1,12 @@
 int __testual__assert_count = 0;
 
 struct testual_error_t {
-    bool is_error;
+    int is_error;
     const char *error_description;
 };
 
 #define __testual__return_error(message) { \
-    testual_error_t err; err.is_error = true; \
+    struct testual_error_t err; err.is_error = 1; \
     err.error_description = message; \
     return err; \
 }

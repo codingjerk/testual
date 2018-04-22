@@ -3,6 +3,8 @@
 // TODO: init (or setup) code blocks to contain common tests data
 // TODO: extract utils, parse and generation functions to separate files
 // TODO: remove this TODOs and move it to issue tracker
+// TODO: allow to fail tests with timeout
+// TODO: write testual_run script to collect all tests
 
 #include <iostream>
 #include <sstream>
@@ -107,7 +109,7 @@ void parse_test_start(const std::string& file_prefix, std::ostream& out, const t
     test_started = true;
 
     out << "// test " << test_head.test_name << std::endl;
-    out << "testual_error_t " << file_prefix + test_head.function_name << "() {" << std::endl;
+    out << "struct testual_error_t " << file_prefix + test_head.function_name << "() {" << std::endl;
 
     name_table.emplace(test_head.test_name, file_prefix + test_head.function_name);
 }
@@ -115,7 +117,7 @@ void parse_test_start(const std::string& file_prefix, std::ostream& out, const t
 void parse_test_end(std::ostream& out) {
     test_started = false;
 
-    out << "    testual_error_t err; err.is_error = false;" << std::endl;
+    out << "    struct testual_error_t err; err.is_error = 0;" << std::endl;
     out << "    return err;" << std::endl;
     out << "}" << std::endl;
 }
@@ -173,7 +175,7 @@ std::string colorize(const std::string& str, const std::string& color) {
 
 void generate_main_header(std::ostream& out) {
     out << "int main() {" << std::endl;
-    out << lvl1 << "testual_error_t err;" << std::endl;
+    out << lvl1 << "struct testual_error_t err;" << std::endl;
     out << lvl1 << "int total = 0, passed = 0, failed = 0;" << std::endl;
 
     out << std::endl;
