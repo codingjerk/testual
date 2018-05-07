@@ -154,8 +154,5 @@ Use files instead of classes for test suites.
     };
   </pre>
 </td>
-<td>
-  
-</td>
 </tr>
 </table>
