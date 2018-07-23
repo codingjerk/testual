@@ -63,6 +63,10 @@ std::string replace_bad_characters(const std::string& str) {
             result += "__slash__";
         } else if (c == '.') {
             result += "__dot__";
+        } else if (c == '(') {
+            result += "__left_round_braket__";
+        } else if (c == ')') {
+            result += "__right_round_braket__";
         } else {
             std::cerr << "Unknown character in test name: " << c << std::endl;
             exit(1);
@@ -242,7 +246,7 @@ void generate_test_passed(std::ostream& out, const std::string& lvl, const std::
 void generate_test_failed(std::ostream& out, const std::string& lvl, const std::string& test_name, const std::string& time_var) {
     std::string icon = colorize("✘", color_red_bold);
     std::string title = colorize(test_name, color_red_bold);
-    generate_printf(out, lvl, lvl1 + icon + " " + title);
+    generate_printf_line(out, lvl, lvl1 + icon + " " + title);
 
     generate_printf_line_params(out, lvl, lvl2 + colorize("%s", color_red_bold), "err.error_description");
 
