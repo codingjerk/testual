@@ -97,62 +97,53 @@ Use files instead of classes for test suites.
 
 ## Fast comparison with other frameworks (only code, without comments)
 
-### 
-<table>
-<tr>
-<th>Testual</th><th>CxxTest</th>
-</tr>
-<tr>
-<td>
-   <pre lang="C++">
-    int factorial(int n);
-    
-    test negative factorial throws exception {
-        assert_throw(factorial(-1));
-    }
-    
-    test factorial on too big argument throws exception {
-        assert_throw(factorial(100));
-    }
-    
-    test 0! == 1 {
-        assert_equal(factorial(0), 1);
-    }
-    
-    test factorial of first 3 Ns {
-        assert_equal(factorial(1), 1);
-        assert_equal(factorial(2), 2);
-        assert_equal(factorial(3), 6);
-    }
-   </pre>
-</td>
-<td>
-  <pre lang="C++">
-    #include &lt;cxxtest/TestSuite.h&gt;
+### Testual
+```C++
+int factorial(int n);
 
-    int factorial(int n);
-  
-    class FactorialTestSuite1: public CxxTest::TestSuite {
-    public:
-        void testNegativeNsThrowsException() {
-            TS_ASSERT_THROWS_ANYTHING(factorial(-1));
-        }
-        
-        void testTooBigNsThrowsException() {
-            TS_ASSERT_THROWS_ANYTHING(factorial(100));
-        }
-        
-        void testFactorialOfZeroIsOne() {
-            TS_ASSERT_EQUALS(factorial(0), 1);
-        }
-        
-        void testFirst3Ns() {
-            TS_ASSERT_EQUALS(factorial(1), 1);
-            TS_ASSERT_EQUALS(factorial(2), 2);
-            TS_ASSERT_EQUALS(factorial(3), 6);
-        }
-    };
-  </pre>
-</td>
-</tr>
-</table>
+test negative factorial throws exception {
+    assert_throw(factorial(-1));
+}
+    
+test factorial on too big argument throws exception {
+    assert_throw(factorial(100));
+}
+
+test 0! == 1 {
+    assert_equal(factorial(0), 1);
+}
+
+test factorial of first 3 Ns {
+    assert_equal(factorial(1), 1);
+    assert_equal(factorial(2), 2);
+    assert_equal(factorial(3), 6);
+}
+```
+
+### CxxTest
+```C++
+#include &lt;cxxtest/TestSuite.h&gt;
+
+int factorial(int n);
+
+class FactorialTestSuite1: public CxxTest::TestSuite {
+public:
+    void testNegativeNsThrowsException() {
+        TS_ASSERT_THROWS_ANYTHING(factorial(-1));
+    }
+    
+    void testTooBigNsThrowsException() {
+        TS_ASSERT_THROWS_ANYTHING(factorial(100));
+    }
+    
+    void testFactorialOfZeroIsOne() {
+        TS_ASSERT_EQUALS(factorial(0), 1);
+    }
+    
+    void testFirst3Ns() {
+        TS_ASSERT_EQUALS(factorial(1), 1);
+        TS_ASSERT_EQUALS(factorial(2), 2);
+        TS_ASSERT_EQUALS(factorial(3), 6);
+    }
+};
+```
