@@ -122,7 +122,7 @@ test factorial of first 3 Ns {
 
 ### CxxTest
 ```C++
-#include &lt;cxxtest/TestSuite.h&gt;
+#include <cxxtest/TestSuite.h>
 
 int factorial(int n);
 
